@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARC | DESIGN AGENCY</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     <style>
+        /* CORE STYLING */
+        * { cursor: none !important; } /* Hide real cursor */
+        
         body {
             background-color: #000;
             color: #fff;
@@ -16,10 +18,10 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             overflow-x: hidden;
-            cursor: none; /* Hide real cursor to use custom one */
+            scroll-behavior: smooth; /* Native smooth scroll */
         }
 
-        /* CURSOR FIX - Fixed position, no lag */
+        /* THE CURSOR - FIXED POSITION */
         #cursor {
             width: 15px;
             height: 15px;
@@ -32,7 +34,8 @@
             z-index: 9999;
             mix-blend-mode: difference;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s;
+            transition: width 0.3s, height 0.3s;
+            display: block;
         }
 
         nav {
@@ -47,7 +50,7 @@
             font-size: 0.8rem;
         }
 
-        nav a { color: #fff; text-decoration: none; pointer-events: auto; }
+        nav a { color: #fff; text-decoration: none; }
 
         .hero {
             height: 100vh;
@@ -55,3 +58,178 @@
             justify-content: center;
             align-items: center;
         }
+
+        .hero h1 { font-size: 22vw; margin: 0; user-select: none; }
+
+        .work-list { padding: 0 30px 150px 30px; }
+
+        .project-group {
+            border-bottom: 1px solid #333;
+            width: 100%;
+        }
+
+        .project-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 0;
+            cursor: pointer;
+        }
+
+        .project-name { font-size: 4vw; pointer-events: none; }
+
+        /* THE DROPBOX GALLERY */
+        .gallery-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #050505;
+        }
+
+        .gallery-wrapper.open {
+            max-height: 500px; /* Expands to show images */
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 40px 10px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+
+        .item {
+            min-width: 300px;
+            height: 400px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #222;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            * { cursor: auto !important; }
+            #cursor { display: none; }
+            .project-name { font-size: 7vw; }
+            .hero h1 { font-size: 30vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <nav>
+        <a href="#" onclick="window.location.reload();">HOME</a>
+        <a href="mailto:contact@arc.xyz">CONTACT</a>
+    </nav>
+
+    <div class="hero">
+        <h1>ARC</h1>
+    </div>
+
+    <section class="work-list">
+        
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">VFX / VISUALIZERS</div>
+                <div>(15)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item">VFX WORK 1</div>
+                    <div class="item">VFX WORK 2</div>
+                    <div class="item">VFX WORK 3</div>
+                    <div class="item">VFX WORK 4</div>
+                    <div class="item">VFX WORK 5</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">MUSIC ROLLOUTS</div>
+                <div>(08)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item">ROLLOUT 1</div>
+                    <div class="item">ROLLOUT 2</div>
+                    <div class="item">ROLLOUT 3</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">BRANDING / MERCH</div>
+                <div>(12)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item">BRANDING 1</div>
+                    <div class="item">BRANDING 2</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">CREATIVE DIRECTION</div>
+                <div>(05)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item">CD WORK 1</div>
+                    <div class="item">CD WORK 2</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer style="padding: 100px 30px; text-align: center; opacity: 0.2; font-size: 0.7rem;">
+        ARC AGENCY — 2026
+    </footer>
+
+    <script>
+        // 1. CURSOR TRACKING (THE FIX)
+        const cursor = document.getElementById('cursor');
+        
+        // This listens for mouse movement on the whole window
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 2. TOGGLE GALLERY (THE DROPBOX)
+        function toggleGallery(row) {
+            const wrapper = row.nextElementSibling;
+            
+            // Toggle the 'open' class
+            if (wrapper.classList.contains('open')) {
+                wrapper.classList.remove('open');
+            } else {
+                // Close any other open galleries first (optional)
+                document.querySelectorAll('.gallery-wrapper').forEach(el => el.classList.remove('open'));
+                wrapper.classList.add('open');
+            }
+        }
+
+        // 3. CURSOR HOVER EFFECTS
+        document.querySelectorAll('.project-row, nav a').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '70px';
+                cursor.style.height = '70px';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '15px';
+                cursor.style.height = '15px';
+            });
+        });
+    </script>
+</body>
+</html>
