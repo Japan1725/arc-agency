@@ -6,13 +6,11 @@
     <title>ARC | DESIGN AGENCY</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     <style>
-        /* FONT STYLING */
         body {
             background-color: #000;
             color: #fff;
             margin: 0;
             padding: 0;
-            /* HELVETICA NEUE BOLD, ALL CAPS, 8% KERN (0.08em) */
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: bold;
             text-transform: uppercase;
@@ -20,11 +18,7 @@
             overflow-x: hidden;
         }
 
-        /* SMOOTH SCROLL CONTAINER */
-        [data-scroll-container] {
-            perspective: 1px;
-        }
-
+        /* NAVIGATION CLEANUP */
         nav {
             position: fixed;
             top: 0;
@@ -34,6 +28,18 @@
             justify-content: space-between;
             z-index: 100;
             mix-blend-mode: difference;
+            box-sizing: border-box;
+            font-size: 0.8rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.5;
         }
 
         .hero {
@@ -45,54 +51,64 @@
             text-align: center;
         }
 
-        /* THE ARC BIG LOGO */
         .hero h1 {
-            font-size: 15vw;
+            font-size: 22vw;
             margin: 0;
             line-height: 0.8;
-            cursor: pointer;
-            transition: transform 0.3s ease;
         }
 
-        .hero h1:hover {
-            transform: scale(1.05);
-            -webkit-text-stroke: 1px #fff;
-            color: transparent;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 30vw; }
+            nav { padding: 20px; }
         }
 
-        .subtitle {
-            font-size: 1rem;
-            margin-top: 20px;
-        }
-
-        /* SECTION STYLING */
-        section {
-            padding: 100px 50px;
-            min-height: 80vh;
+        /* UPDATED CATEGORY ROWS */
+        section.work-list {
+            padding: 0 50px;
         }
 
         .project-row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 1px solid #333;
+            align-items: center;
+            border-bottom: 1px solid #222;
             padding: 40px 0;
-            transition: opacity 0.3s;
+            cursor: pointer;
+            transition: padding 0.4s ease;
         }
 
         .project-row:hover {
-            opacity: 0.5;
+            padding-left: 20px;
+            color: #555;
         }
 
         .project-name {
             font-size: 4vw;
         }
 
-        .project-year {
-            font-size: 1.2rem;
+        /* IMAGE GALLERY (WORKS POPPING UP) */
+        .gallery-section {
+            padding: 100px 50px;
         }
 
-        /* INTERACTIVE CURSOR */
+        .work-item {
+            width: 100%;
+            margin-bottom: 10vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .work-item img {
+            width: 60%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .work-item img:hover {
+            filter: grayscale(0%);
+        }
+
         #cursor {
             width: 20px;
             height: 20px;
@@ -102,14 +118,13 @@
             pointer-events: none;
             z-index: 999;
             mix-blend-mode: difference;
-            transition: transform 0.1s ease-out;
         }
 
         footer {
-            padding: 50px;
+            padding: 100px 20px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #555;
+            font-size: 0.6rem;
+            opacity: 0.3;
         }
     </style>
 </head>
@@ -118,66 +133,57 @@
     <div id="cursor"></div>
 
     <nav>
-        <div>ARC</div>
-        <div>PROJECTS, SERVICES, ABOUT</div>
+        <a href="index.html">HOME</a>
+        <a href="mailto:your@email.com">CONTACT</a>
     </nav>
 
     <div class="hero" data-scroll-section>
-        <h1 data-scroll data-scroll-speed="2">ARC</h1>
-        <div class="subtitle" data-scroll data-scroll-speed="1">Design Agency / London / NYC</div>
+        <h1 data-scroll data-scroll-speed="3">ARC</h1>
     </div>
 
-    <section data-scroll-section>
+    <section class="work-list" data-scroll-section>
         <div class="project-row" data-scroll data-scroll-speed="1">
-            <div class="project-name">01. Visual Identity</div>
-            <div class="project-year">2024</div>
+            <div class="project-name">VFX / VISUALIZERS</div>
+            <div style="font-size: 0.7rem;">(01)</div>
         </div>
-        <div class="project-row" data-scroll data-scroll-speed="3">
-            <div class="project-name">02. Spatial Design</div>
-            <div class="project-year">2024</div>
+        <div class="project-row" data-scroll data-scroll-speed="1.5">
+            <div class="project-name">MUSIC ROLLOUTS</div>
+            <div style="font-size: 0.7rem;">(02)</div>
         </div>
         <div class="project-row" data-scroll data-scroll-speed="2">
-            <div class="project-name">03. Digital Experiences</div>
-            <div class="project-year">2023</div>
+            <div class="project-name">BRANDING / MERCH</div>
+            <div style="font-size: 0.7rem;">(03)</div>
         </div>
-        <div class="project-row" data-scroll data-scroll-speed="4">
-            <div class="project-name">04. Creative Direction</div>
-            <div class="project-year">2023</div>
+        <div class="project-row" data-scroll data-scroll-speed="2.5">
+            <div class="project-name">CREATIVE DIRECTION</div>
+            <div style="font-size: 0.7rem;">(04)</div>
         </div>
     </section>
 
-    <section style="height: 50vh; display: flex; align-items: center; justify-content: center;" data-scroll-section>
-        <h2 style="font-size: 5vw;" data-scroll data-scroll-direction="horizontal" data-scroll-speed="6">
-            START A PROJECT — START A PROJECT — START A PROJECT
-        </h2>
+    <section class="gallery-section" data-scroll-section>
+        <div class="work-item" data-scroll data-scroll-speed="1">
+            <img src="https://via.placeholder.com/800x1000/111/fff?text=VFX+WORK+1" alt="ARC Work">
+        </div>
+        <div class="work-item" data-scroll data-scroll-speed="2">
+            <img src="https://via.placeholder.com/800x600/111/fff?text=ROLLOUT+WORK+1" alt="ARC Work">
+        </div>
+        <div class="work-item" data-scroll data-scroll-speed="1.5">
+            <img src="https://via.placeholder.com/800x1000/111/fff?text=BRANDING+WORK+1" alt="ARC Work">
+        </div>
     </section>
 
     <footer data-scroll-section>
-        © 2024 ARC AGENCY. ALL RIGHTS RESERVED.
+        ARC AGENCY — 2026 — ALL RIGHTS RESERVED
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script>
-        // Initialize Smooth Scroll
         const scroller = new LocomotiveScroll({
             el: document.querySelector('[data-scroll-container]'),
             smooth: true,
-            multiplier: 1,
-            lerp: 0.05 // Lower is smoother/slower (like Duties)
+            smartphone: { smooth: true },
+            tablet: { smooth: true }
         });
 
-        // Mouse Follower
         const cursor = document.getElementById('cursor');
-        window.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        // Expand cursor on hover
-        document.querySelectorAll('h1, .project-row').forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.style.transform = 'scale(4)');
-            item.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
-        });
-    </script>
-</body>
-</html>
+        window.addEventListener('mousemove', (e
