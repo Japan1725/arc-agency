@@ -16,97 +16,10 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             overflow-x: hidden;
+            cursor: none; /* Hide real cursor to use custom one */
         }
 
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 1000;
-            mix-blend-mode: difference;
-            box-sizing: border-box;
-            font-size: 0.8rem;
-        }
-
-        nav a { color: #fff; text-decoration: none; cursor: pointer; }
-
-        /* HERO */
-        .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero h1 { font-size: 22vw; margin: 0; }
-
-        /* ACCORDION SECTIONS */
-        .work-list { padding: 0 30px 100px 30px; }
-
-        .project-group {
-            border-bottom: 1px solid #333;
-            overflow: hidden;
-        }
-
-        .project-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 40px 0;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .project-row:hover { color: #888; }
-        .project-name { font-size: 4vw; }
-
-        /* HORIZONTAL GALLERY (The "Hidden" Part) */
-        .gallery-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.8s cubic-bezier(0.7, 0, 0.3, 1);
-            background: #0a0a0a;
-        }
-
-        .gallery-wrapper.open {
-            max-height: 500px; /* Adjust based on image height */
-            padding-bottom: 40px;
-        }
-
-        .horizontal-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px;
-            scroll-behavior: smooth;
-        }
-
-        /* Hide Scrollbar but keep functionality */
-        .horizontal-scroll::-webkit-scrollbar { display: none; }
-
-        .item {
-            flex: 0 0 300px;
-            height: 400px;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            border: 1px solid #222;
-        }
-
-        .item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(1);
-        }
-
-        /* CURSOR FIX */
+        /* CURSOR FIX - Fixed position, no lag */
         #cursor {
             width: 15px;
             height: 15px;
@@ -119,64 +32,26 @@
             z-index: 9999;
             mix-blend-mode: difference;
             transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
+            transition: width 0.2s, height 0.2s;
         }
 
-        @media (max-width: 768px) {
-            #cursor { display: none; }
-            .project-name { font-size: 6vw; }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+            box-sizing: border-box;
+            font-size: 0.8rem;
         }
-    </style>
-</head>
-<body data-scroll-container>
 
-    <div id="cursor"></div>
+        nav a { color: #fff; text-decoration: none; pointer-events: auto; }
 
-    <nav>
-        <a href="javascript:location.reload()">HOME</a>
-        <a href="mailto:contact@arc.xyz">CONTACT</a>
-    </nav>
-
-    <div class="hero" data-scroll-section>
-        <h1 data-scroll data-scroll-speed="2">ARC</h1>
-    </div>
-
-    <section class="work-list" data-scroll-section>
-        
-        <div class="project-group">
-            <div class="project-row" onclick="toggleGallery(this)">
-                <div class="project-name">VFX / VISUALIZERS</div>
-                <div>(15 WORKS)</div>
-            </div>
-            <div class="gallery-wrapper">
-                <div class="horizontal-scroll">
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+01"></div>
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+02"></div>
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+03"></div>
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+04"></div>
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+05"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-group">
-            <div class="project-row" onclick="toggleGallery(this)">
-                <div class="project-name">MUSIC ROLLOUTS</div>
-                <div>(08 WORKS)</div>
-            </div>
-            <div class="gallery-wrapper">
-                <div class="horizontal-scroll">
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=MUSIC+01"></div>
-                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=MUSIC+02"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-group">
-            <div class="project-row" onclick="toggleGallery(this)">
-                <div class="project-name">BRANDING / MERCH</div>
-                <div>(12 WORKS)</div>
-            </div>
-            <div class="gallery-wrapper">
-                <div class="horizontal-scroll">
-                    <div class="item">MERCH
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
