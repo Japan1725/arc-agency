@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARC | DESIGN AGENCY</title>
     <style>
-        /* CORE STYLING */
-        * { cursor: none !important; } /* Hide real cursor */
+        * { cursor: none !important; }
         
         body {
             background-color: #000;
@@ -18,10 +17,9 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             overflow-x: hidden;
-            scroll-behavior: smooth; /* Native smooth scroll */
+            scroll-behavior: smooth;
         }
 
-        /* THE CURSOR - FIXED POSITION */
         #cursor {
             width: 15px;
             height: 15px;
@@ -35,7 +33,6 @@
             mix-blend-mode: difference;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s;
-            display: block;
         }
 
         nav {
@@ -52,21 +49,40 @@
 
         nav a { color: #fff; text-decoration: none; }
 
+        /* HERO SECTION */
         .hero {
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
-        .hero h1 { font-size: 22vw; margin: 0; user-select: none; }
+        .hero h1 { 
+            font-size: 22vw; 
+            margin: 0; 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        /* ARC LOGO INTERACTION */
+        .hero h1:hover {
+            transform: scale(1.1);
+            -webkit-text-stroke: 2px #fff;
+            color: transparent;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            margin-top: -20px;
+            letter-spacing: 0.08em;
+            opacity: 0.8;
+        }
 
         .work-list { padding: 0 30px 150px 30px; }
 
-        .project-group {
-            border-bottom: 1px solid #333;
-            width: 100%;
-        }
+        .project-group { border-bottom: 1px solid #333; width: 100%; }
 
         .project-row {
             display: flex;
@@ -78,7 +94,6 @@
 
         .project-name { font-size: 4vw; pointer-events: none; }
 
-        /* THE DROPBOX GALLERY */
         .gallery-wrapper {
             max-height: 0;
             overflow: hidden;
@@ -86,9 +101,7 @@
             background: #050505;
         }
 
-        .gallery-wrapper.open {
-            max-height: 500px; /* Expands to show images */
-        }
+        .gallery-wrapper.open { max-height: 500px; }
 
         .horizontal-scroll {
             display: flex;
@@ -100,14 +113,17 @@
         .horizontal-scroll::-webkit-scrollbar { display: none; }
 
         .item {
-            min-width: 300px;
+            min-width: 320px;
             height: 400px;
             background: #111;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             border: 1px solid #222;
             flex-shrink: 0;
+            font-size: 0.6rem;
+            color: #444;
         }
 
         @media (max-width: 768px) {
@@ -115,6 +131,7 @@
             #cursor { display: none; }
             .project-name { font-size: 7vw; }
             .hero h1 { font-size: 30vw; }
+            .hero h2 { font-size: 0.8rem; margin-top: 0; }
         }
     </style>
 </head>
@@ -129,6 +146,7 @@
 
     <div class="hero">
         <h1>ARC</h1>
+        <h2>Creative Design Agency</h2>
     </div>
 
     <section class="work-list">
@@ -136,15 +154,13 @@
         <div class="project-group">
             <div class="project-row" onclick="toggleGallery(this)">
                 <div class="project-name">VFX / VISUALIZERS</div>
-                <div>(15)</div>
+                <div>(07)</div>
             </div>
             <div class="gallery-wrapper">
                 <div class="horizontal-scroll">
-                    <div class="item">VFX WORK 1</div>
-                    <div class="item">VFX WORK 2</div>
-                    <div class="item">VFX WORK 3</div>
-                    <div class="item">VFX WORK 4</div>
-                    <div class="item">VFX WORK 5</div>
+                    <div class="item">VFX_01</div><div class="item">VFX_02</div><div class="item">VFX_03</div>
+                    <div class="item">VFX_04</div><div class="item">VFX_05</div><div class="item">VFX_06</div>
+                    <div class="item">VFX_07</div>
                 </div>
             </div>
         </div>
@@ -152,13 +168,13 @@
         <div class="project-group">
             <div class="project-row" onclick="toggleGallery(this)">
                 <div class="project-name">MUSIC ROLLOUTS</div>
-                <div>(08)</div>
+                <div>(07)</div>
             </div>
             <div class="gallery-wrapper">
                 <div class="horizontal-scroll">
-                    <div class="item">ROLLOUT 1</div>
-                    <div class="item">ROLLOUT 2</div>
-                    <div class="item">ROLLOUT 3</div>
+                    <div class="item">MUSIC_01</div><div class="item">MUSIC_02</div><div class="item">MUSIC_03</div>
+                    <div class="item">MUSIC_04</div><div class="item">MUSIC_05</div><div class="item">MUSIC_06</div>
+                    <div class="item">MUSIC_07</div>
                 </div>
             </div>
         </div>
@@ -166,12 +182,13 @@
         <div class="project-group">
             <div class="project-row" onclick="toggleGallery(this)">
                 <div class="project-name">BRANDING / MERCH</div>
-                <div>(12)</div>
+                <div>(07)</div>
             </div>
             <div class="gallery-wrapper">
                 <div class="horizontal-scroll">
-                    <div class="item">BRANDING 1</div>
-                    <div class="item">BRANDING 2</div>
+                    <div class="item">BRAND_01</div><div class="item">BRAND_02</div><div class="item">BRAND_03</div>
+                    <div class="item">BRAND_04</div><div class="item">BRAND_05</div><div class="item">BRAND_06</div>
+                    <div class="item">BRAND_07</div>
                 </div>
             </div>
         </div>
@@ -179,12 +196,13 @@
         <div class="project-group">
             <div class="project-row" onclick="toggleGallery(this)">
                 <div class="project-name">CREATIVE DIRECTION</div>
-                <div>(05)</div>
+                <div>(07)</div>
             </div>
             <div class="gallery-wrapper">
                 <div class="horizontal-scroll">
-                    <div class="item">CD WORK 1</div>
-                    <div class="item">CD WORK 2</div>
+                    <div class="item">CD_01</div><div class="item">CD_02</div><div class="item">CD_03</div>
+                    <div class="item">CD_04</div><div class="item">CD_05</div><div class="item">CD_06</div>
+                    <div class="item">CD_07</div>
                 </div>
             </div>
         </div>
@@ -196,34 +214,26 @@
     </footer>
 
     <script>
-        // 1. CURSOR TRACKING (THE FIX)
         const cursor = document.getElementById('cursor');
-        
-        // This listens for mouse movement on the whole window
         window.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // 2. TOGGLE GALLERY (THE DROPBOX)
         function toggleGallery(row) {
             const wrapper = row.nextElementSibling;
-            
-            // Toggle the 'open' class
             if (wrapper.classList.contains('open')) {
                 wrapper.classList.remove('open');
             } else {
-                // Close any other open galleries first (optional)
                 document.querySelectorAll('.gallery-wrapper').forEach(el => el.classList.remove('open'));
                 wrapper.classList.add('open');
             }
         }
 
-        // 3. CURSOR HOVER EFFECTS
-        document.querySelectorAll('.project-row, nav a').forEach(el => {
+        document.querySelectorAll('.project-row, nav a, .hero h1').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.width = '70px';
-                cursor.style.height = '70px';
+                cursor.style.width = '80px';
+                cursor.style.height = '80px';
             });
             el.addEventListener('mouseleave', () => {
                 cursor.style.width = '15px';
