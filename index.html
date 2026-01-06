@@ -18,7 +18,7 @@
             overflow-x: hidden;
         }
 
-        /* NAVIGATION CLEANUP */
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
@@ -26,105 +26,105 @@
             padding: 30px;
             display: flex;
             justify-content: space-between;
-            z-index: 100;
+            z-index: 1000;
             mix-blend-mode: difference;
             box-sizing: border-box;
             font-size: 0.8rem;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
+        nav a { color: #fff; text-decoration: none; cursor: pointer; }
 
-        nav a:hover {
-            opacity: 0.5;
-        }
-
+        /* HERO */
         .hero {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
         }
 
-        .hero h1 {
-            font-size: 22vw;
-            margin: 0;
-            line-height: 0.8;
-        }
+        .hero h1 { font-size: 22vw; margin: 0; }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 30vw; }
-            nav { padding: 20px; }
-        }
+        /* ACCORDION SECTIONS */
+        .work-list { padding: 0 30px 100px 30px; }
 
-        /* UPDATED CATEGORY ROWS */
-        section.work-list {
-            padding: 0 50px;
+        .project-group {
+            border-bottom: 1px solid #333;
+            overflow: hidden;
         }
 
         .project-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222;
             padding: 40px 0;
             cursor: pointer;
-            transition: padding 0.4s ease;
+            transition: color 0.3s;
         }
 
-        .project-row:hover {
-            padding-left: 20px;
-            color: #555;
+        .project-row:hover { color: #888; }
+        .project-name { font-size: 4vw; }
+
+        /* HORIZONTAL GALLERY (The "Hidden" Part) */
+        .gallery-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+            background: #0a0a0a;
         }
 
-        .project-name {
-            font-size: 4vw;
+        .gallery-wrapper.open {
+            max-height: 500px; /* Adjust based on image height */
+            padding-bottom: 40px;
         }
 
-        /* IMAGE GALLERY (WORKS POPPING UP) */
-        .gallery-section {
-            padding: 100px 50px;
-        }
-
-        .work-item {
-            width: 100%;
-            margin-bottom: 10vh;
+        .horizontal-scroll {
             display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+
+        /* Hide Scrollbar but keep functionality */
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+
+        .item {
+            flex: 0 0 300px;
+            height: 400px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            font-size: 0.6rem;
+            border: 1px solid #222;
         }
 
-        .work-item img {
-            width: 60%;
-            height: auto;
-            filter: grayscale(100%);
-            transition: filter 0.5s ease;
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1);
         }
 
-        .work-item img:hover {
-            filter: grayscale(0%);
-        }
-
+        /* CURSOR FIX */
         #cursor {
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             background: #fff;
             border-radius: 50%;
             position: fixed;
+            top: 0;
+            left: 0;
             pointer-events: none;
-            z-index: 999;
+            z-index: 9999;
             mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
         }
 
-        footer {
-            padding: 100px 20px;
-            text-align: center;
-            font-size: 0.6rem;
-            opacity: 0.3;
+        @media (max-width: 768px) {
+            #cursor { display: none; }
+            .project-name { font-size: 6vw; }
         }
     </style>
 </head>
@@ -133,57 +133,50 @@
     <div id="cursor"></div>
 
     <nav>
-        <a href="index.html">HOME</a>
-        <a href="mailto:your@email.com">CONTACT</a>
+        <a href="javascript:location.reload()">HOME</a>
+        <a href="mailto:contact@arc.xyz">CONTACT</a>
     </nav>
 
     <div class="hero" data-scroll-section>
-        <h1 data-scroll data-scroll-speed="3">ARC</h1>
+        <h1 data-scroll data-scroll-speed="2">ARC</h1>
     </div>
 
     <section class="work-list" data-scroll-section>
-        <div class="project-row" data-scroll data-scroll-speed="1">
-            <div class="project-name">VFX / VISUALIZERS</div>
-            <div style="font-size: 0.7rem;">(01)</div>
+        
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">VFX / VISUALIZERS</div>
+                <div>(15 WORKS)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+01"></div>
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+02"></div>
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+03"></div>
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+04"></div>
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=VFX+05"></div>
+                </div>
+            </div>
         </div>
-        <div class="project-row" data-scroll data-scroll-speed="1.5">
-            <div class="project-name">MUSIC ROLLOUTS</div>
-            <div style="font-size: 0.7rem;">(02)</div>
-        </div>
-        <div class="project-row" data-scroll data-scroll-speed="2">
-            <div class="project-name">BRANDING / MERCH</div>
-            <div style="font-size: 0.7rem;">(03)</div>
-        </div>
-        <div class="project-row" data-scroll data-scroll-speed="2.5">
-            <div class="project-name">CREATIVE DIRECTION</div>
-            <div style="font-size: 0.7rem;">(04)</div>
-        </div>
-    </section>
 
-    <section class="gallery-section" data-scroll-section>
-        <div class="work-item" data-scroll data-scroll-speed="1">
-            <img src="https://via.placeholder.com/800x1000/111/fff?text=VFX+WORK+1" alt="ARC Work">
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">MUSIC ROLLOUTS</div>
+                <div>(08 WORKS)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=MUSIC+01"></div>
+                    <div class="item"><img src="https://via.placeholder.com/400x600/111/fff?text=MUSIC+02"></div>
+                </div>
+            </div>
         </div>
-        <div class="work-item" data-scroll data-scroll-speed="2">
-            <img src="https://via.placeholder.com/800x600/111/fff?text=ROLLOUT+WORK+1" alt="ARC Work">
-        </div>
-        <div class="work-item" data-scroll data-scroll-speed="1.5">
-            <img src="https://via.placeholder.com/800x1000/111/fff?text=BRANDING+WORK+1" alt="ARC Work">
-        </div>
-    </section>
 
-    <footer data-scroll-section>
-        ARC AGENCY — 2026 — ALL RIGHTS RESERVED
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-    <script>
-        const scroller = new LocomotiveScroll({
-            el: document.querySelector('[data-scroll-container]'),
-            smooth: true,
-            smartphone: { smooth: true },
-            tablet: { smooth: true }
-        });
-
-        const cursor = document.getElementById('cursor');
-        window.addEventListener('mousemove', (e
+        <div class="project-group">
+            <div class="project-row" onclick="toggleGallery(this)">
+                <div class="project-name">BRANDING / MERCH</div>
+                <div>(12 WORKS)</div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="horizontal-scroll">
+                    <div class="item">MERCH
